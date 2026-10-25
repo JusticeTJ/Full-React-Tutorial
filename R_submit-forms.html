@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>REACT SUBMIT FORMS</title>
+</head>
+<body>
+    <!-- ===React Forms=== -->
+<!-- Submitting Forms
+You can control the submit action by adding an event handler in the onSubmit attribute for the <form>:
+
+Example:Get your own React.js Server
+Add a submit button and an event handler in the onSubmit attribute: -->
+<script>
+import { useState } from 'react';
+import { createRoot } from 'react-dom/client';
+
+function MyForm() {
+  const [name, setName] = useState("");
+
+  function handleChange(e) {
+    setName(e.target.value);
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    alert(name);
+  }
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <label>Enter your name:
+        <input
+          type="text" 
+          value={name}
+          onChange={handleChange}
+        />
+      </label>
+      <input type="submit" />
+    </form>
+  )
+}
+
+createRoot(document.getElementById('sandy')).render(
+  <MyForm />
+);
+</script>
+</body>
+</html>

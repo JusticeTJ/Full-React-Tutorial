@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Destruction</title>
+</head>
+<body>
+    <!--==== Destructuring in React ===-->
+<!-- Destructuring is a JavaScript feature that allows you to extract values from objects or arrays into distinct variables. In React, it's commonly used with props, hooks, and state management.
+
+Note: Destructuring makes React code cleaner and more readable by reducing repetitive object and array access. -->
+
+<!-- DESTRUCTING ARRAYS
+Here is the old way of assigning array items to a variable
+ Before: -->
+<p id="car"></p>
+
+<script>
+const vehicles = ['mustang', 'f-150', 'expedition'];
+
+// old way
+const cars = vehicles[0];
+const trucks = vehicles[1];
+const suvs = vehicles[2];
+
+//You can now access each variable separately:
+document.getElementById('car').innerHTML = trucks;
+</script>
+
+<!-- Here is the new way of assigning array items to a variable:
+Example
+With destructuring: -->
+<p id="cars"></p>
+
+<script>
+const Car = ['mustang', 'f-150', 'expedition'];
+
+const [car, truck, suv] = Car;
+
+//You can now access each variable separately:
+document.getElementById('cars').innerHTML = truck;
+</script>
+
+<!-- When destructuring arrays, the order that variables are declared is important.
+If we only want the car and suv we can simply leave out the truck but keep the comma:
+const vehicles = ['mustang', 'f-150', 'expedition'];
+const [car,, suv] = vehicles; -->
+
+<!-- Destructuring comes in handy when a function returns an array: -->
+ <p id="demo10"></p>
+
+<script>
+function dateInfo(dat) {
+  const d = dat.getDate();
+  const m = dat.getMonth() + 1;
+  const y = dat.getFullYear();
+
+  return [d, m, y];
+}
+
+const [date, month, year] = dateInfo(new Date());
+
+//You can now access each variable separately:
+document.getElementById('demo10').innerHTML = "The year is " + year;
+</script>
+
+<!-- DESTRUCTURING OBJECTS
+You can use destructuring to extract the values from an object:
+
+Example
+Unpack the values from an object: -->
+<p id="name"></p>
+  
+<script>
+const person = {
+  firstName: "John",
+  lastName: "Doe",
+  age: 50
+};
+
+// Destructuring
+let {firstName, lastName, age} = person;
+
+//You can now access each variable separately:
+document.getElementById("name").innerHTML = firstName;
+</script>
+
+<!-- For objects, the order of the properties does not matter:
+Example
+Unpack the values in a random order: -->
+<p id="names"></p>
+  
+<script>const people = {
+  firstName: "John",
+  lastName: "Doe",
+  Age: 50
+};
+
+// Destructuring
+let {lastname, Age, firstname} = people;
+
+//You can access each variable separately:
+document.getElementById("names").innerHTML = Age;
+</script>
+
+<!-- You can extract only the value(s) you want:
+Example
+Extract only firstName from the object: -->
+<p id="demoP"></p>
+  
+<script>
+const phones = {
+  samsung: "S25 ULTRA",
+  apple: "16 PRO MAX",
+  google: "PIXEL 9+"
+};
+
+// Destructuring
+let {samsung} = phones
+
+document.getElementById("demoP").innerHTML = "I love the new" + samsung;
+</script>
+
+<!-- For potentially missing properties we can set default values:
+Example
+Set a default value for the missing property: -->
+<p id="Name"></p>
+  
+<script>const humans = {
+  FirstName: "John",
+  LastName: "Doe",
+  AGE: 50
+};
+
+// Destructuring
+let {FirstName, LastName, AGE, country = "Norway"} = humans;
+
+// Access country:
+document.getElementById("Name").innerHTML = country;
+</script>
+
+<!-- We can also destructure deeply nested objects by referencing the nested object then using a colon and curly
+  braces to again destructure the items needed from the nested object: -->
+<p id="DO"></p>
+  
+<script>
+const example = {
+  Firstname: "John",
+  Lastname: "Doe",
+  age: 50,
+  Car: {
+    brand: 'Ford',
+    model: 'Mustang',
+  }
+};
+
+// Destructuring
+let {Firstname, Car: { brand, model }} = example;
+
+// Access the variables:
+let message = `My name is ${Firstname}, and I drive a ${brand} ${model}.`;
+
+document.getElementById("DO").innerHTML = message;
+</script>
+
+<!-- DESTRUCTURING in REACT COMPOMNENTS
+Destructuring is particularly useful in React for working with props, hooks, and API responses.
+ It helps make your code more concise and easier to read. -->
+
+<!-- Props Destructuring
+When a component receives props, you can use destructuring to extract the values you need.
+
+Check out the difference between using and not using destructuring:  -->
+<p id="root"></p>
+<script type="module">
+function Greeting({ name, age }) {
+  return `Hello ${name}! You are ${age} years old.`;
+}
+
+document.getElementById('root').textContent = Greeting({ name: 'Justice', age: 25 });
+// BEST DESCRIPED IN THE MAIN.JSX FILE
+</script>
+
+<!-- useState HOOK DESTRUCTURING
+When a component uses the useState hook, we use destructuring to extract the values from it.
+
+Example (BEST DESCRIBED IN THE MAIN.JSX FILE):
+Using destructuring to extract values from useState: -->
+<p id="counter-demo"></p>
+<script>
+const counterContainer = document.getElementById('counter-demo');
+let count = 0;
+
+function updateCounter() {
+  counterContainer.innerHTML = '';
+  const button = document.createElement('button');
+  button.textContent = `Count: ${count}`;
+  button.addEventListener('click', () => {
+    count += 1;
+    updateCounter();
+  });
+  counterContainer.appendChild(button);
+}
+
+updateCounter();
+</script>
+</p>
+</body>
+</html>

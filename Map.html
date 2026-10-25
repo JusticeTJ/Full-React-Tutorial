@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Array map()</title>
+</head>
+<body>
+    <!-- ==========The map() Method=========== -->
+<!-- The *map()* method creates a new array with the results of calling a function for every array element. -->
+
+<div id="map"></div>
+
+<script>
+const numbers = [1, 2, 3, 4];
+const doubled = numbers.map(x => x * 2);
+
+document.getElementById("map").innerHTML = doubled;
+</script>
+
+<!-- Map() in React-->
+<!--The map() method is commonly used in React to render lists of elements: -->
+<div class="root"></div>
+<script>
+    import { createRoot } from 'react-dom/client'
+
+const fruitlist = ['apple', 'banana', 'cherry'];
+
+function MyList() {
+  return (
+    <ul>
+      {fruitlist.map(fruit => 
+        <li key={fruit}>{fruit}</li>
+      )}
+    </ul>
+  );
+}
+
+createRoot(document.getElementById('root')).render(
+  <MyList />
+)
+</script>
+<!-- Note: When using *map()* in React to create list items, each item needs a unique key prop. -->
+
+<!-- ==*map()* with Objects==
+You can also use map() with arrays of objects: -->
+<script>
+    import { createRoot } from 'react-dom/client'
+
+const users = [
+  { id: 1, name: 'John', age: 30 },
+  { id: 2, name: 'Jane', age: 25 },
+  { id: 3, name: 'Bob', age: 35 }
+];
+
+function UserList() {
+  return (
+    <ul>
+      {users.map(user => 
+        <li key={user.id}>
+          {user.name} is {user.age} years old
+        </li>
+      )}
+    </ul>
+  );
+}
+
+createRoot(document.getElementById('root')).render(
+  <UserList />
+)
+</script>
+
+<!-- ===map() Parameters===
+The map() method takes three parameters:
+
+currentValue - The current element being processed
+index - The index of the current element (optional)
+array - The array that map was called upon (optional) -->
+<script>
+    import { createRoot } from 'react-dom/client'
+
+const fruitlist1 = ['apple', 'banana', 'cherry'];
+
+function App() {
+  return (
+    <ul>
+      {fruitlist1.map((fruit, index, array) => {
+        return (
+          <li key={fruit}>
+            Name: {fruit}, Index: {index}, Array: {array}
+          </li>
+        );
+      })}
+    </ul>
+  );
+}
+
+createRoot(document.getElementById('root')).render(
+  <App />
+)
+</script>
+</body>
+</html>

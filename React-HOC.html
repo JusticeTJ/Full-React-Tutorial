@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>REACT H.O.C</title>
+</head>
+<body>
+    <!-- =====React Higher Order Components (HOC) ===== -->
+
+<!-- What is a Higher Order Component?
+    A Higher Order Component (HOC) is like a wrapper that adds extra features to your React components. Think of it like putting a case on your phone - the case adds new features (like water protection) without changing the phone itself.
+
+Note: HOCs are functions that take a component and return an enhanced version of that component.
+
+Example: Adding a Border
+To demonstrate how HOCs work, let's create a simple example - adding a border to any component:
+
+Example: -->
+<script>
+//Create a function that adds a border around whatever component you pass to it:
+
+// This is our HOC - it adds a border to any component
+function withBorder(WrappedComponent) {
+  return function NewComponent(props) {
+    return (
+      <div style={{ border: '2px solid blue', padding: '10px' }}>
+        <WrappedComponent {...props} />
+      </div>
+    );
+  };
+}
+
+// Simple component without border
+function Greeting({ name }) {
+  return <h1>Hello, {name}!</h1>;
+}
+
+// Create a new component with border
+const GreetingWithBorder = withBorder(Greeting);
+
+function App() {
+  return (
+    <div>
+      <Greeting name="John" />
+      <GreetingWithBorder name="Jane" />
+    </div>
+  );
+}
+</script>
+
+<!-- In this example:
+
+withBorder is our HOC - it's a function that takes a component
+It returns a new component that wraps the original in a div with a border
+The original component (Greeting) remains unchanged
+We can still use both the original and enhanced versions
+
+Note: Often, HOC's can be replaced with React Hooks, but HOC's are still useful for certain cross-cutting concerns like authentication or data fetching patterns. -->
+</body>
+</html>

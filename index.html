@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MY FIRST REACT LESSON</title>
+    <!--This is not how we should add styles in React,
+  but for demo purposes, it is ok: -->
+  <style>
+    .myclass {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <!-- npm run dev -->
+<!-- React uses a container to render HTML in a web page.
+Typically, this container is a <div id="root"></div> e
+If you have followed the steps in the previous chapter, you should have a file called index.html in the root directory of your project: -->
+  
+    <div id="sandy"></div>
+ 
+
+<!--CLASSES-->
+<!-- ES6 introduced classes.
+A class is a type of function, but instead of using the keyword function to initiate it,
+ we use the keyword class, and the properties are assigned inside a constructor() method. -->
+    <script>
+class Car {
+  constructor(name) {
+    this.brand = name;
+  }
+}
+
+const mycar = new Car("Ford");
+
+document.write(mycar.brand);
+</script><br>
+<!-- Notice the case of the class name. We have begun the name, "Car", with an uppercase character.
+  This is a standard naming convention for classes. -->
+  <script>
+  class Bike {
+  constructor(name) {
+    this.brand = name;
+  }
+  
+  present() {
+    return 'I have a ' + this.brand;
+  }
+}
+
+const mybike = new Bike("Ninja Kawasaki H2");
+document.write(mybike.present());
+</script><br>
+<!-- As you can see in the example above, you call the method by referring to the object's method name followed by parentheses (parameters would go inside the parentheses). -->
+
+<!-- Class Inheritance
+To create a class inheritance, use the *extends* keyword.
+
+A class created with a class inheritance inherits all the methods from another class: -->
+
+<!-- Example
+Create a class named "Model" which will inherit the methods from the "Ride" class: -->
+<script>
+class Ride {
+  constructor(name) {
+    this.brand = name;
+  }
+
+  present() {
+    return 'I have a ' + this.brand;
+  }
+}
+
+class Model extends Ride {
+  constructor(name, mod) {
+    super(name);
+    this.model = mod;
+  }  
+  show() {
+    return this.present() + ', it is a ' + this.model
+  }
+}
+
+const myride = new Model("Nissian", "Pathfinder");
+document.write(myride.show());
+</script><br>
+<!-- The super() method refers to the parent class.
+By calling the super() method in the constructor method,
+ we call the parent's constructor method and get access to the parent's properties and methods. -->
+
+
+<!-- =======ARROW FUNCTIONS=========-->
+<!--Arrow functions allow us to write shorter function syntax: -->
+
+<!-- Before: -->
+<h1>Function</h1>
+
+<p>This demonstrates a regular function, NOT an arrow function.</p>
+
+<p id="demo"></p>
+  
+<script>
+hello = function() {
+  return "Hello World!";
+}
+
+document.getElementById("demo").innerHTML = hello();
+</script>
+
+<!-- After: -->
+<h1>Arrow Function</h1>
+
+<p>A demonstration of a simple arrow function.</p>
+
+<p id="demo2"></p>
+  
+<script>
+hi = () => {
+  return "Hello World!";
+}
+
+document.getElementById("demo2").innerHTML = hi();
+</script>
+
+<!-- It gets shorter! If the function has only one statement, and the statement returns a value,
+  you can remove the brackets and the return keyword: -->
+
+<!-- Example
+Arrow Functions Return Value by Default:   -->
+
+<h1>Arrow Function</h1>
+
+<h2>Implicit Return</h2>
+
+<p>The arrow function expects a return value, and returns the value by default, without the <strong>return</strong> keyword.</p>
+
+<p id="demo3"></p>
+  
+<script>
+hello = () => "Hello World!";
+
+document.getElementById("demo3").innerHTML = hello();
+</script>
+<!-- Note: This works only if the function has only one statement.
+If you have parameters, you pass them inside the parentheses: -->
+
+<!-- Example
+Arrow Function With Parameters: -->
+<h1>Arrow Function</h1>
+<p>A demonstration of an arrow function in one line, with parameters.</p>
+
+<p id="demo4"></p>
+  
+<script>
+hello = (val) => "Hello " + val;
+
+document.getElementById("demo4").innerHTML = hello("World");
+</script>
+
+<!-- Arrow Function Without Parentheses: -->
+ <h1>Arrow Function</h1>
+<p>As you can see in this example, you can skip the parentheses when you have only one parameter.</p>
+
+<p id="demo5"></p>
+  
+<script>
+hello = val => "Hello " + val;
+
+document.getElementById("demo5").innerHTML = hello("World");
+</script>
+
+
+<!-- What About *this*?
+The handling of *this* is also different in arrow functions compared to regular functions.
+
+In short, with arrow functions there is no binding of *this*.
+
+In regular functions the *this* keyword represented the object that called the function, which could be the window, the document, a button or whatever.
+
+With arrow functions, the *this* keyword always represents the object that defined the arrow function.
+
+Let us take a look at two examples to understand the difference.
+
+Both examples call a method twice, first when the page loads, and once again when the user clicks a button.
+
+The first example uses a regular function, and the second example uses an arrow function.
+
+The result shows that the first example returns two different objects (window and button), and the second example returns the Header object twice. -->
+
+
+<h1>Regular Function</h1>
+
+<p>The <strong>this</strong> keyword represents different objects depending on how the function was called.</p>
+
+<button id="btn2">Click Me!</button>
+
+<p><strong>this</strong> represents:</p>
+
+<p id="example"></p>
+
+<p>See the difference before and after the button is clicked.</p>
+  
+<script>
+class Header {
+  constructor() {
+    this.color = "Red";
+  }
+
+  changeColor = function() {
+    document.getElementById("example").innerHTML += this;
+  }
+}
+
+const myheader = new Header();
+
+//The window object calls the function:
+window.addEventListener("load", myheader.changeColor);
+
+//A button object calls the function:
+document.getElementById("btn2").addEventListener("click", myheader.changeColor);
+
+</script>
+
+<!-- WITH ARROW FUCTION -->
+<h1>Arrow Function</h1>
+
+<p>The <strong>this</strong> keyword represents the Header object.</p>
+
+<button id="btn">Click Me!</button>
+
+<p><strong>this</strong> represents:</p>
+
+<p id="example2"></p>
+
+ 
+<script>
+class Header1 {
+  constructor() {
+    this.color = "Red";
+  }
+
+  changeColor = () => {
+    document.getElementById("example2").innerHTML += this;
+  }
+}
+
+const myheader2 = new Header();
+
+//The window object calls the function:
+window.addEventListener("load", myheader2.changeColor);
+
+//A button object calls the function:
+document.getElementById("btn").addEventListener("click", myheader2.changeColor);
+
+</script>
+
+
+<!-- ==========VARIABLE=====================-->
+<!--Before ES6 there was only one way of defining your variables: with the var keyword. If you did not define them, they would be assigned to the global object. Unless you were in strict mode, then you would get an error if your variables were undefined.
+
+Now, with ES6, there are three ways of defining your variables: var, let, and const. -->
+
+<script>
+    // =====VAR========
+    var x = 5.6;
+//     If you use *var* outside of a function, it belongs to the global scope.
+
+// If you use *var* inside of a function, it belongs to that function.
+
+// If you use *var* inside of a block, i.e. a for loop, the variable is still available outside of that block.
+
+// *var* has a function scope, not a block scope.
+
+// ====LET=====
+let x = 5.6;
+// *let* is the block scoped version of *var*, and is limited to the block (or expression) where it is defined.
+
+// If you use *let* inside of a block, i.e. a for loop, the variable is only available inside of that loop.
+
+// *let* has a block scope.
+
+// CONST
+const x = 5.6;
+// *const* is a variable that once it has been created, its value can never change.
+
+// *const* has a block scope.
+
+// The keyword *const* is a bit misleading.
+
+// It does not define a constant value. It defines a constant reference to a value.
+
+// Because of this you can NOT:
+
+// Reassign a constant value
+// Reassign a constant array
+// Reassign a constant object
+// But you CAN:
+
+// Change the elements of constant array
+// Change the properties of constant object
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script type="module" src="/src/main.jsx"></script><br>
+  </body>
+</html>

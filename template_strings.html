@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Template Strings</title>
+</head>
+<body>
+    <!--======Template Strings=====-->
+<!--Template strings allow you to write strings that span multiple lines and include embedded expressions: -->
+
+<!-- Example
+Before: -->
+<h1>Example</h1>
+
+<p>Without using template strings:</p>
+
+<div id="demo"></div>
+
+<script>
+const name = "Justice";
+const age = 24;
+const message = "Hello, " + name + "!\n" + 
+"You are " + age + " years old.";
+
+document.getElementById("demo").innerHTML = message;
+</script>
+
+<!-- Example
+With Template Strings: -->
+<h1>Example</h1>
+
+<p>With template strings you can write strings that span multiple lines and include embedded expressions:</p>
+
+<div id="demo1"></div>
+
+<script>
+const Name = "John";
+const Age = 30;
+const Message = `Hello, ${Name}!
+You are ${Age} years old.`;
+
+document.getElementById("demo1").innerHTML = Message;
+</script>
+
+<!-- Template strings use backticks (`) instead of quotes and can include:
+
+Multiple lines without \n[suddden espressions like ! and special symbols]
+Expressions inside ${}
+Quotes without escaping -->
+
+<!-- Example
+Multi-line Strings: -->
+<h1>Example</h1>
+
+<p>With template strings you can write strings that span multiple lines:</p>
+
+<div id="demo2"></div>
+
+<script>
+const html = `
+  <div>
+    <h1>Title</h1>
+    <p>Paragraph</p>
+  </div>
+`;
+
+document.getElementById("demo2").innerHTML = html;
+</script>
+
+<!-- Note: The indentation in multi-line strings becomes part of the string.
+
+Example
+The indentation becomes part of the string: -->
+<h1>Example</h1>
+
+<p>With template strings, the indentation is part of the string.</p>
+<p>This is not visible for most HTML elements, but the PRE element preservers any spaces and new lines:</p>
+
+<pre id="demo3"></pre>
+
+<script>
+const x = `
+  John:
+    Hello, how are you?
+  Jane:
+    I'm fine, thanks!
+`;
+
+document.getElementById("demo3").innerHTML = x;
+</script>
+
+<!-- Expression Interpolation
+You can include any valid JavaScript expression inside ${} in a template string:
+
+Example
+Insert variables inside template strings: -->
+<h1>Example</h1>
+
+<p>With template strings you can add variables inside ${} brackets:</p>
+
+<div id="demo4"></div>
+
+<script>
+let firstName = "John";
+let lastName = "Doe";
+
+let text = `Welcome ${firstName} and ${lastName}!`;
+
+document.getElementById("demo4").innerHTML = text;
+</script>
+
+<!-- Example
+Insert expressions inside template strings: -->
+<h1>Example</h1>
+
+<p>With template strings you can execute expressions(eg addition, substraction, multiplication, etc..) inside ${} brackets:</p>
+
+<div id="demo5"></div>
+
+<script>
+let price = 10;
+let quantity = 5;
+
+let total = `Total: ${price * quantity}`;
+
+document.getElementById("demo5").innerHTML = total;
+</script>
+
+<!-- Example
+Using the map function inside template strings: -->
+<h1>Example</h1>
+
+<p>You can use the Array.map() function inside a template string:</p>
+
+<div id="demo6"></div>
+
+<script>
+const items = ["apple", "banana", "orange"];
+const list = `You have ${items.length} items:
+${items.map(item => `- ${item}`).join('\n')}`;
+
+document.getElementById("demo6").innerHTML = list;
+</script>
+
+<!-- Example
+Using ternery operator inside template strings: -->
+<h1>Example</h1>
+
+<p>You can use the ternary operator inside a template string:</p>
+
+<div id="demo7"></div>
+
+<script>
+const isAdmin = true;
+const Text = `Status: ${isAdmin ? 'Admin' : 'User'}`;
+
+document.getElementById("demo7").innerHTML = Text;
+</script>
+
+<!-- Tagged Templates
+You can also use template strings with a function (called a tag) to modify the output.
+
+Note: Tagged templates are an advanced feature. You might not need them in most cases.
+
+The function takes the text and the expression(s) as arguments.
+Look at the example below:
+
+Example
+Tagged Template: -->
+<h1>Example</h1>
+
+<p>You can use the tagged template inside a template string:</p>
+
+<div id="demo8"></div>
+
+<script>
+function highlight(strings, fname) {
+  let x = fname.toUpperCase();
+  return strings[0] + x + strings[1];
+}
+
+let NAME = "Tochi";
+
+let TEXT = highlight`Hello ${NAME}, how are you?`;
+
+document.getElementById("demo8").innerHTML = TEXT;
+</script>
+
+<!-- Example Explained
+The function name is highlight, you can name it whatever you want.
+
+The first argument holds the text between the expressions, as an array.
+The array items are splitted by the expression.
+In this example strings[0] holds "Hello " and strings[1] holds " how are you?".
+
+The second argument holds the expressions. In this example fname holds "John".
+
+Inside the function you can use the arguments to create the final string, and return it.
+
+Note: If the template string contains multiple expressions, the text will still be held in the first argument,
+ but the expressions will either be held in multiple arguments, or as an array in the second argument. -->
+
+ <!-- Example
+Tagged Template with multiple expressions: -->
+<h1>Example</h1>
+
+<p>Note that the first argument, strings , now holds 3 items:</p>
+
+<div id="demo10"></div>
+
+<script>
+function highlight1(strings, fname1, fname2) {
+  let z = fname1.toUpperCase();
+  let y = fname2.toUpperCase();
+  return strings[0] + z + strings[1] + y + strings[2];
+}
+
+let name1 = "John";
+let name2 = "Jane";
+
+let word = highlight1`Hello ${name1} and ${name2}, how are you?`;
+
+document.getElementById("demo10").innerHTML = word;
+</script>
+ 
+<!-- Example
+Tagged Template with multiple expressions that are held in an array using the rest parameter: -->
+<h1>Example</h1>
+
+<p>Note that the second argument uses the rest syntax, ...fname, and now holds the two expressions as an array:</p>
+
+<div id="demo11"></div>
+
+<script>
+function highlight(strings, ...fname) {
+  let a = fname[0].toUpperCase();
+  let b = fname[1].toUpperCase();
+  return strings[0] + a + strings[1] + b + strings[2];
+}
+
+let name3 = "John";
+let name4 = "Jane";
+
+let Word = highlight`Hello ${name3} and ${name4}, how are you?`;
+
+document.getElementById("demo11").innerHTML = Word;
+</script>
+</body>
+</html>
